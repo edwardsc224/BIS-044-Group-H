@@ -30,12 +30,12 @@ Married <- results1 %>% filter(ever_married=="Yes") %>% group_by(gender,age) %>%
   summarize(stroketotal = sum(stroke)/128)
 
 library(ggplot2)
-ggplot(Married, aes(x=age , y = stroketotal, color=gender)) + geom_bar(stat="identity", position = "dodge") +
+ggplot(Married, aes(x=age , y = stroketotal, color=gender)) + geom_bar(stat="identity", position = "dodge") + 
 
   ggtitle("Total Stroke Distribution for Married") + 
   xlab("Age") + 
   ylab("Frequency") +
-  scale_x_continuous(breaks = seq(0, 10000, 500))
+  scale_x_continuous(breaks = seq(15, 100, 5))
 
 
 Unmarried <- results1 %>% filter(ever_married=="No") %>% group_by(gender,age) %>% 
@@ -45,7 +45,7 @@ library(ggplot2)
 ggplot(Unmarried, aes(x=age , y = stroketotal, color=gender)) + geom_bar(stat="identity", position = "dodge") +
 
   ggtitle("Total Stroke Distribution for Unmarried Data") + 
-  xlab("Age") + scale_x_continuous(breaks = seq(0, 10000, 500)) +
+  xlab("Age") + scale_x_continuous(breaks = seq(0, 100, 5)) +
   ylab("Frequency")
 
 #5-year categories for x axis
