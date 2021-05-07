@@ -9,9 +9,16 @@ results <-
 
 results1 <- results %>%select(gender,age,ever_married,stroke)
 
+#Find the total number of males and females who have has a stroke
+femnum <-results1 %>% filter(gender =="Female") %>% 
+  summarize(stroketotal =sum(stroke))
+
+malenum <-results1 %>% filter(gender =="Male")  %>% 
+  summarize(stroketotal =sum(stroke))
+
 # Find four groups (numerical): unmarried female, married female,
 # unmarried male, married male, and compare to prove/disprove hypothesis
-Males <- 249
+Males <- 108
 Females <- 141
 
 Male_Unmarried <- results1 %>% filter(gender=="Male") %>% filter(ever_married =="No") %>% 
@@ -37,7 +44,6 @@ ggplot(Married, aes(x=age , y = stroketotal, color=gender)) + geom_bar(stat="ide
   ylab("Frequency") +
   scale_x_continuous(breaks = seq(15, 100, 5))
 
-
 Unmarried <- results1 %>% filter(ever_married=="No") %>% group_by(gender,age) %>% 
   summarize(stroketotal = sum(stroke)/196)
 
@@ -48,8 +54,5 @@ ggplot(Unmarried, aes(x=age , y = stroketotal, color=gender)) + geom_bar(stat="i
   xlab("Age") + scale_x_continuous(breaks = seq(0, 100, 5)) +
   ylab("Frequency")
 
-#5-year categories for x axis
-#convert numbers to percentages -> even out data so males/females are measured 
-#the same
 
 
